@@ -1,0 +1,5 @@
+break_explosionChance: 0.03125
+torch_explosionChance: 0.2
+torch_range: 2
+explosion_power: 3.0
+explosion_delay: 2

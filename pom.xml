@@ -4,7 +4,7 @@
 
   <groupId>org.github.MrCrime</groupId>
   <artifactId>More-Dangers</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.0</version>
   <packaging>jar</packaging>
 
   <name>More-Dangers</name>
