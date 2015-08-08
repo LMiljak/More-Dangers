@@ -2,6 +2,7 @@ package org.github.MrCrime.More_Dangers;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.github.MrCrime.More_Dangers.burning_netherrack.NetherrackWalkListener;
 import org.github.MrCrime.More_Dangers.coal_explosion.CoalBreakListener;
 import org.github.MrCrime.More_Dangers.coal_explosion.TorchNearCoalListener;
 
@@ -30,6 +31,7 @@ public class Plugin extends JavaPlugin {
 		
 		new CoalBreakListener(this);
 		new TorchNearCoalListener(this);
+		new NetherrackWalkListener(this);
 	}
 	
 	private void readConfig() {
