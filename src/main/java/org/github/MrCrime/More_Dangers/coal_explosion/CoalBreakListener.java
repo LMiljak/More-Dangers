@@ -8,7 +8,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.github.MrCrime.More_Dangers.Plugin;
+import org.bukkit.plugin.Plugin;
+import org.github.MrCrime.More_Dangers.Main;
 
 /**
  * Listens for players breaking coal ore and after a player
@@ -40,7 +41,7 @@ public class CoalBreakListener implements Listener {
 	public void onBlockBreak(BlockBreakEvent event) {
 		if (event.getBlock().getType().equals(Material.COAL_ORE) 
 				&& !event.getPlayer().getGameMode().equals(GameMode.CREATIVE)) {
-			if (Plugin.getBreakEChance() > new Random().nextDouble()) {
+			if (Main.getBreakEChance() > new Random().nextDouble()) {
 				explosionCauser.coalExplosion(event.getBlock());
 			}
 		}

@@ -9,7 +9,7 @@ import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.github.MrCrime.More_Dangers.Plugin;
+import org.github.MrCrime.More_Dangers.Main;
 import org.github.MrCrime.More_Dangers.Util;
 
 /**
@@ -36,7 +36,7 @@ public class ExplosionCauser {
 			@Override
 			public void run() {
 				Block b = vein.poll();
-				world.createExplosion(b.getLocation(), Plugin.getEPower());
+				world.createExplosion(b.getLocation(), Main.getEPower());
 				
 				if (vein.isEmpty())
 					cancel();
@@ -44,7 +44,7 @@ public class ExplosionCauser {
 				for (Block block : vein) block.setType(Material.COAL_ORE);
 			}
 			
-		}).runTaskTimer(Plugin.getInstance(), 60, Plugin.getEDelay());
+		}).runTaskTimer(Main.getInstance(), 60, Main.getEDelay());
 		
 	}
 	

@@ -6,11 +6,12 @@ import org.github.MrCrime.More_Dangers.burning_netherrack.NetherrackWalkListener
 import org.github.MrCrime.More_Dangers.coal_explosion.CoalBreakListener;
 import org.github.MrCrime.More_Dangers.coal_explosion.TorchNearCoalListener;
 import org.github.MrCrime.More_Dangers.spiderwebs.SpiderAttackListener;
+import org.github.MrCrime.More_Dangers.zombie_infection.ZombieAttackListener;
 
 /**
  * The "main" class of the plugin.
  */
-public class Plugin extends JavaPlugin {
+public class Main extends JavaPlugin {
     
 	//Coal-explosion settings
 	private static double break_explosionChance;
@@ -19,7 +20,10 @@ public class Plugin extends JavaPlugin {
 	private static float explosion_power;
 	private static long explosion_delay;
 	
-	private static Plugin instance;
+	//Zombie-infection settings
+	private static int zombie_food_damage;
+	
+	private static Main instance;
 	
 	private FileConfiguration config;
 	
@@ -34,6 +38,7 @@ public class Plugin extends JavaPlugin {
 		new TorchNearCoalListener(this);
 		new NetherrackWalkListener(this);
 		new SpiderAttackListener(this);
+		new ZombieAttackListener(this);
 	}
 	
 	private void readConfig() {
@@ -44,12 +49,14 @@ public class Plugin extends JavaPlugin {
 		torch_range = config.getInt("torch_range");
 		explosion_power = (float) config.getDouble("explosion_power");
 		explosion_delay = config.getLong("explosion_delay");
+		
+		zombie_food_damage = config.getInt("zombie_food_damage");
 	}
 	
 	/**
 	 * @return the instance of this plugin.
 	 */
-	public static Plugin getInstance() {
+	public static Main getInstance() {
 		return instance;
 	}
 
@@ -86,6 +93,13 @@ public class Plugin extends JavaPlugin {
 	 */
 	public static long getEDelay() {
 		return explosion_delay;
+	}
+	
+	/**
+	 * @return the amount of hunger a zombie should remove from the player if struck.
+	 */
+	public static int getFoodDamage() {
+		return zombie_food_damage;
 	}
 	
 }
