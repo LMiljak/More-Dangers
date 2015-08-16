@@ -5,6 +5,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.github.MrCrime.More_Dangers.burning_netherrack.NetherrackWalkListener;
 import org.github.MrCrime.More_Dangers.coal_explosion.CoalBreakListener;
 import org.github.MrCrime.More_Dangers.coal_explosion.TorchNearCoalListener;
+import org.github.MrCrime.More_Dangers.spiderwebs.SpiderAttackListener;
 
 /**
  * The "main" class of the plugin.
@@ -32,6 +33,7 @@ public class Plugin extends JavaPlugin {
 		new CoalBreakListener(this);
 		new TorchNearCoalListener(this);
 		new NetherrackWalkListener(this);
+		new SpiderAttackListener(this);
 	}
 	
 	private void readConfig() {
