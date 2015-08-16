@@ -10,7 +10,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
-import org.github.MrCrime.More_Dangers.Plugin;
+import org.github.MrCrime.More_Dangers.Main;
 
 public class TorchNearCoalListener implements Listener {
 
@@ -22,7 +22,7 @@ public class TorchNearCoalListener implements Listener {
 	 * @param plugin
 	 * 		The plugin that the server is using
 	 */
-	public TorchNearCoalListener(Plugin plugin) {
+	public TorchNearCoalListener(Main plugin) {
 		plugin.getServer().getPluginManager().registerEvents(this, plugin);
 	}
 	
@@ -43,7 +43,7 @@ public class TorchNearCoalListener implements Listener {
 			int x = (int) loc.getX();
 			int y = (int) loc.getY();
 			int z = (int) loc.getZ();
-			int range = Plugin.getTorchRange();
+			int range = Main.getTorchRange();
 			Random r = new Random();
 			
 			for (int i = x - range; i <= x + range; i++) {
@@ -51,7 +51,7 @@ public class TorchNearCoalListener implements Listener {
 					for (int k = z - range; k <= z + range; k++) {
 						Block b = world.getBlockAt(i, j, k);
 						if (b.getType().equals(Material.COAL_ORE)) {
-							if (Plugin.getTorchEChance() > r.nextDouble()) {
+							if (Main.getTorchEChance() > r.nextDouble()) {
 								explosionCauser.coalExplosion(b);
 								return;
 							}
