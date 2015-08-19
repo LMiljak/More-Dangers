@@ -5,6 +5,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.github.MrCrime.More_Dangers.burning_netherrack.NetherrackWalkListener;
 import org.github.MrCrime.More_Dangers.coal_explosion.CoalBreakListener;
 import org.github.MrCrime.More_Dangers.coal_explosion.TorchNearCoalListener;
+import org.github.MrCrime.More_Dangers.spider_mother.SpiderMotherSpawner;
 import org.github.MrCrime.More_Dangers.spiderwebs.SpiderAttackListener;
 import org.github.MrCrime.More_Dangers.zombie_infection.ZombieAttackListener;
 
@@ -39,6 +40,7 @@ public class Main extends JavaPlugin {
 		new NetherrackWalkListener(this);
 		new SpiderAttackListener(this);
 		new ZombieAttackListener(this);
+		new SpiderMotherSpawner(this);
 	}
 	
 	private void readConfig() {
