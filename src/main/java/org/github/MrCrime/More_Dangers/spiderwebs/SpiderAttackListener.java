@@ -1,12 +1,15 @@
 package org.github.MrCrime.More_Dangers.spiderwebs;
 
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.github.MrCrime.More_Dangers.Main;
 
 /**
  * Listens for attacking spiders and places cobweb
@@ -33,7 +36,15 @@ public class SpiderAttackListener implements Listener {
 		EntityType damager = event.getDamager().getType();
 		if (!damager.equals(EntityType.CAVE_SPIDER) && !damager.equals(EntityType.SPIDER) ) return;
 		
-		event.getEntity().getLocation().getBlock().setType(Material.WEB);
+		final Block b = event.getEntity().getLocation().getBlock();
+		b.setType(Material.WEB);
+		
+		new BukkitRunnable() {
+			@Override
+			public void run() {
+				if (b.getType().equals(Material.WEB)) b.breakNaturally();
+			}
+		}.runTaskLater(Main.getInstance(), 60);
 	}
 	
 }
