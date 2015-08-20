@@ -5,6 +5,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.github.MrCrime.More_Dangers.burning_netherrack.NetherrackWalkListener;
 import org.github.MrCrime.More_Dangers.coal_explosion.CoalBreakListener;
 import org.github.MrCrime.More_Dangers.coal_explosion.TorchNearCoalListener;
+import org.github.MrCrime.More_Dangers.spider_mother.SpiderMotherSpawner;
 import org.github.MrCrime.More_Dangers.spiderwebs.SpiderAttackListener;
 import org.github.MrCrime.More_Dangers.zombie_infection.ZombieAttackListener;
 
@@ -23,6 +24,9 @@ public class Main extends JavaPlugin {
 	//Zombie-infection settings
 	private static int zombie_food_damage;
 	
+	//Spider-mother settings
+	private static double mother_chance;
+	
 	private static Main instance;
 	
 	private FileConfiguration config;
@@ -39,18 +43,21 @@ public class Main extends JavaPlugin {
 		new NetherrackWalkListener(this);
 		new SpiderAttackListener(this);
 		new ZombieAttackListener(this);
+		new SpiderMotherSpawner(this);
 	}
 	
 	private void readConfig() {
 		config = getConfig();
 		
-		break_explosionChance = config.getDouble("break_explosionChance");
-		torch_explosionChance = config.getDouble("torch_explosionChance");
-		torch_range = config.getInt("torch_range");
-		explosion_power = (float) config.getDouble("explosion_power");
-		explosion_delay = config.getLong("explosion_delay");
+		break_explosionChance = config.getDouble("CE break explosion chance");
+		torch_explosionChance = config.getDouble("CE torch explosion chance");
+		torch_range = config.getInt("CE torch range");
+		explosion_power = (float) config.getDouble("CE explosion power");
+		explosion_delay = config.getLong("CE explosion delay");
 		
-		zombie_food_damage = config.getInt("zombie_food_damage");
+		zombie_food_damage = config.getInt("ZI food damage");
+		
+		mother_chance = config.getDouble("SM chance");
 	}
 	
 	/**
@@ -102,4 +109,11 @@ public class Main extends JavaPlugin {
 		return zombie_food_damage;
 	}
 	
+	/**
+	 * @return the chance for a spider to turn into a spider mother
+	 * 		after spawning.
+	 */
+	public static double getSMChance() {
+		return mother_chance;
+	}
 }
