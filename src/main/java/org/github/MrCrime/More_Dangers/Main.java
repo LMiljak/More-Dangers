@@ -21,6 +21,9 @@ public class Main extends JavaPlugin {
 	private static float explosion_power;
 	private static long explosion_delay;
 	
+	//Burning netherrack settings
+	private static boolean BNEnabled;
+	
 	//Zombie-infection settings
 	private static int zombie_food_damage;
 	
@@ -40,7 +43,7 @@ public class Main extends JavaPlugin {
 		
 		new CoalBreakListener(this);
 		new TorchNearCoalListener(this);
-		new NetherrackWalkListener(this);
+		if (BNEnabled) new NetherrackWalkListener(this);
 		new SpiderAttackListener(this);
 		new ZombieAttackListener(this);
 		new SpiderMotherSpawner(this);
@@ -54,6 +57,8 @@ public class Main extends JavaPlugin {
 		torch_range = config.getInt("CE torch range");
 		explosion_power = (float) config.getDouble("CE explosion power");
 		explosion_delay = config.getLong("CE explosion delay");
+		
+		BNEnabled = config.getBoolean("BN enabled");
 		
 		zombie_food_damage = config.getInt("ZI food damage");
 		
