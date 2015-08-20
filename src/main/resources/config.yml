@@ -4,6 +4,10 @@ CE torch range: 2
 CE explosion power: 3.0
 CE explosion delay: 2
 
+SW enabled: true
+SW web chance: 1.0
+SW web despawn time: 60
+
 BN enabled: true
 
 ZI food damage: 5

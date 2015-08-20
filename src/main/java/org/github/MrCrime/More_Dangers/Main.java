@@ -24,6 +24,11 @@ public class Main extends JavaPlugin {
 	//Burning netherrack settings
 	private static boolean BNEnabled;
 	
+	//Spiderwebs settings
+	private static boolean SWEnabled;
+	private static double web_chance;
+	private static int web_despawn_time;
+	
 	//Zombie-infection settings
 	private static int zombie_food_damage;
 	
@@ -31,7 +36,6 @@ public class Main extends JavaPlugin {
 	private static double mother_chance;
 	
 	private static Main instance;
-	
 	private FileConfiguration config;
 	
 	@Override
@@ -44,7 +48,7 @@ public class Main extends JavaPlugin {
 		new CoalBreakListener(this);
 		new TorchNearCoalListener(this);
 		if (BNEnabled) new NetherrackWalkListener(this);
-		new SpiderAttackListener(this);
+		if (SWEnabled) new SpiderAttackListener(this);
 		new ZombieAttackListener(this);
 		new SpiderMotherSpawner(this);
 	}
@@ -59,6 +63,10 @@ public class Main extends JavaPlugin {
 		explosion_delay = config.getLong("CE explosion delay");
 		
 		BNEnabled = config.getBoolean("BN enabled");
+		
+		SWEnabled = config.getBoolean("SW enabled");
+		web_chance = config.getDouble("SW web chance");
+		web_despawn_time = config.getInt("SW web despawn time");
 		
 		zombie_food_damage = config.getInt("ZI food damage");
 		
@@ -120,5 +128,21 @@ public class Main extends JavaPlugin {
 	 */
 	public static double getSMChance() {
 		return mother_chance;
+	}
+	
+	/**
+	 * @return the chance an entity gets stuck in cobweb after being struck
+	 * 		by a spider or cave spider.
+	 */
+	public static double getWebChance() {
+		return web_chance;
+	}
+	
+	/**
+	 * @return the amount of ticks before a cobweb created by a spider/cavespider
+	 * 		breaks automatically.
+	 */
+	public static int getWebDespawnTime() {
+		return web_despawn_time;
 	}
 }

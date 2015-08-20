@@ -1,5 +1,7 @@
 package org.github.MrCrime.More_Dangers.spiderwebs;
 
+import java.util.Random;
+
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
@@ -34,7 +36,8 @@ public class SpiderAttackListener implements Listener {
 	@EventHandler (priority = EventPriority.MONITOR)
 	public void onSpiderAttack(EntityDamageByEntityEvent event) {
 		EntityType damager = event.getDamager().getType();
-		if (!damager.equals(EntityType.CAVE_SPIDER) && !damager.equals(EntityType.SPIDER) ) return;
+		if (!damager.equals(EntityType.CAVE_SPIDER) && !damager.equals(EntityType.SPIDER)
+				&& new Random().nextDouble() > Main.getWebChance()) return;
 		
 		final Block b = event.getEntity().getLocation().getBlock();
 		b.setType(Material.WEB);
@@ -44,7 +47,7 @@ public class SpiderAttackListener implements Listener {
 			public void run() {
 				if (b.getType().equals(Material.WEB)) b.breakNaturally();
 			}
-		}.runTaskLater(Main.getInstance(), 60);
+		}.runTaskLater(Main.getInstance(), Main.getWebDespawnTime());
 	}
 	
 }
