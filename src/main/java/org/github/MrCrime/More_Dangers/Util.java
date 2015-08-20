@@ -64,4 +64,42 @@ public class Util {
 		}.runTaskTimer(Main.getInstance(), 0, 15);
 		
 	}
+	
+	/**
+	 * Returns a list of locations that form a sphere.
+	 * 
+	 * @param center
+	 * 		The center location of the sphere
+	 * @param radius
+	 * 		The radius of the sphere
+	 * @param hollow
+	 * 		If the sphere is hollow or not
+	 * @return
+	 * 		a list of location that form a sphere
+	 */
+	public static List<Location> getSphere(Location center, int radius, boolean hollow) {
+		List<Location> sphere = new ArrayList<Location>();
+		
+		int cX = center.getBlockX();
+		int cY = center.getBlockY();
+		int cZ = center.getBlockZ();
+		
+		for (int x = cX - radius; x <= cX + radius; x++) {
+			for (int y = cY - radius; y <= cY + radius; y++) {
+				for (int z = cZ - radius; z <= cZ + radius; z++) {
+					
+					int distanceSq = (cX-x)*(cX-x) + (cY-y)*(cY-y) + (cZ-z)*(cZ-z);
+					
+					if (distanceSq < radius * radius && 
+							!(hollow && distanceSq < (radius-1)*(radius-1))) {
+						Location l = new Location(center.getWorld(), x, y, z);
+						sphere.add(l);
+					}
+					
+				}
+			}
+		}
+		
+		return sphere;
+	}
 }
