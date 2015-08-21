@@ -83,7 +83,7 @@ public class ZombieAttackListener implements Listener {
 		
 		if (entity instanceof Player) {
 			Player player = (Player) entity;
-			if (player.getFoodLevel() <= 10) {
+			if (player.getFoodLevel() <= Main.getPoisonFoodLevel()) {
 				infect(player);
 			}
 			player.setFoodLevel(Math.max(0, player.getFoodLevel() - Main.getFoodDamage()));
@@ -105,7 +105,7 @@ public class ZombieAttackListener implements Listener {
 		
 		Player player = (Player) event.getEntity();
 		
-		if (isInfected(player) && event.getFoodLevel() >= 20) {
+		if (isInfected(player) && event.getFoodLevel() >= Main.getCureFoodLevel()) {
 			player.removePotionEffect(PotionEffectType.POISON);
 		}
 			
