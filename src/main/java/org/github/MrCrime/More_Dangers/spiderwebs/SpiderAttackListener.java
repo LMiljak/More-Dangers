@@ -36,8 +36,8 @@ public class SpiderAttackListener implements Listener {
 	@EventHandler (priority = EventPriority.MONITOR)
 	public void onSpiderAttack(EntityDamageByEntityEvent event) {
 		EntityType damager = event.getDamager().getType();
-		if (!damager.equals(EntityType.CAVE_SPIDER) && !damager.equals(EntityType.SPIDER)
-				&& new Random().nextDouble() > Main.getWebChance()) return;
+		if (!damager.equals(EntityType.CAVE_SPIDER) && !damager.equals(EntityType.SPIDER)) return;
+		if (new Random().nextDouble() > Main.getWebChance()) return;
 		
 		final Block b = event.getEntity().getLocation().getBlock();
 		b.setType(Material.WEB);

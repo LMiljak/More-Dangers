@@ -65,7 +65,7 @@ public class SpiderNest {
 				if (!destroyed) destroy();
 			}
 			
-		}.runTaskLater(Main.getInstance(), Main.getWebDespawnTime());
+		}.runTaskLater(Main.getInstance(), Main.getNestDespawnTime());
 	}
 	
 	/**

@@ -7,6 +7,7 @@ import java.util.Random;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.entity.CaveSpider;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Spider;
 import org.bukkit.event.EventHandler;
@@ -63,6 +64,10 @@ public class SpiderMotherSpawner implements Listener {
 		
 		spider_mothers.add(spider);
 		
+		CaveSpider child = (CaveSpider) 
+				spider.getWorld().spawnEntity(spider.getLocation(), EntityType.CAVE_SPIDER);
+		spider.setPassenger(child);
+		
 		Util.displayParticleEntity(ParticleEffect.EXPLOSION_LARGE, spider);
 	}
 	
@@ -87,7 +92,7 @@ public class SpiderMotherSpawner implements Listener {
 				nests.remove(nest);
 			}
 			
-		}.runTaskLater(Main.getInstance(), Main.getWebDespawnTime() + 100);
+		}.runTaskLater(Main.getInstance(), Main.getNestDespawnTime() + 100);
 	}
 	
 	/**
