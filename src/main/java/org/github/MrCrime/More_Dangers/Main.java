@@ -37,7 +37,11 @@ public class Main extends JavaPlugin {
 	private static int cured_at_foodlevel;
 	
 	//Spider-mother settings
+	private static boolean SMEnabled;
 	private static double mother_chance;
+	private static int children_amount;
+	private static int nest_radius;
+	private static int nest_despawn_time;
 	
 	private static Main instance;
 	private FileConfiguration config;
@@ -56,7 +60,7 @@ public class Main extends JavaPlugin {
 		if (BNEnabled) new NetherrackWalkListener(this);
 		if (SWEnabled) new SpiderAttackListener(this);
 		if (ZIEnabled) new ZombieAttackListener(this);
-		new SpiderMotherSpawner(this);
+		if (SMEnabled) new SpiderMotherSpawner(this);
 	}
 	
 	private void readConfig() {
@@ -80,7 +84,11 @@ public class Main extends JavaPlugin {
 		poisoned_at_foodLevel = config.getInt("ZI poison at foodlevel");
 		cured_at_foodlevel = config.getInt("ZI cured at foodlevel");
 		
+		SMEnabled = config.getBoolean("SM enabled");
 		mother_chance = config.getDouble("SM chance");
+		children_amount = config.getInt("SM cave spiders per nest");
+		nest_radius = config.getInt("SM nest radius");
+		nest_despawn_time = config.getInt("SM nest despawn time");
 	}
 	
 	/**
@@ -169,5 +177,29 @@ public class Main extends JavaPlugin {
 	 */
 	public static int getCureFoodLevel() {
 		return cured_at_foodlevel;
+	}
+	
+	/**
+	 * @return the amount of cave spiders that spawn after a spider mother
+	 * 		gets killed.
+	 */
+	public static int getChildrenAmount() {
+		return children_amount;
+	}
+	
+	/**
+	 * @return the radius of a spider mother nest that gets created
+	 * 		after a spider mother is killed.
+	 */
+	public static int getNestRadius() {
+		return nest_radius;
+	}
+	
+	/**
+	 * @return the amount of ticks it takes for a spider nest to automatically
+	 * 		get destroyed if a player didn't already do that himself.
+	 */
+	public static int getNestDespawnTime() {
+		return nest_despawn_time;
 	}
 }

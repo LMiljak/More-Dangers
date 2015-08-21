@@ -87,7 +87,7 @@ public class SpiderMotherSpawner implements Listener {
 				nests.remove(nest);
 			}
 			
-		}.runTaskLater(Main.getInstance(), 1200);
+		}.runTaskLater(Main.getInstance(), Main.getWebDespawnTime() + 100);
 	}
 	
 	/**

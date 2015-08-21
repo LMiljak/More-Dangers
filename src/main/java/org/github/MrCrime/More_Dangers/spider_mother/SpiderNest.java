@@ -44,7 +44,7 @@ public class SpiderNest {
 		web = new ArrayList<Block>();
 		children = new ArrayList<CaveSpider>();
 		
-		for (Location loc : Util.getSphere(center, 5, true)) {
+		for (Location loc : Util.getSphere(center, Main.getNestRadius(), true)) {
 			Block b = loc.getBlock();
 			if (!b.getType().isSolid()){
 				b.setType(Material.WEB);
@@ -52,7 +52,7 @@ public class SpiderNest {
 			}
 		}
 		
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < Main.getChildrenAmount(); i++) {
 			children.add((CaveSpider) center.getWorld().spawnEntity(center, EntityType.CAVE_SPIDER));
 		}
 		
@@ -65,7 +65,7 @@ public class SpiderNest {
 				if (!destroyed) destroy();
 			}
 			
-		}.runTaskLater(Main.getInstance(), 1100);
+		}.runTaskLater(Main.getInstance(), Main.getWebDespawnTime());
 	}
 	
 	/**
