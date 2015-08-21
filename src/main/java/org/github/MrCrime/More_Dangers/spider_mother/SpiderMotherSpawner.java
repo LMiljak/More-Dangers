@@ -86,12 +86,10 @@ public class SpiderMotherSpawner implements Listener {
 		nests.add(nest);
 		
 		new BukkitRunnable() {
-
 			@Override
 			public void run() {
 				nests.remove(nest);
 			}
-			
 		}.runTaskLater(Main.getInstance(), Main.getNestDespawnTime() + 100);
 	}
 	
