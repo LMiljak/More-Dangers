@@ -11,6 +11,9 @@ SW web despawn time: 60
 
 BN enabled: true
 
+ZI enabled: true
 ZI food damage: 5
+ZI poison at foodlevel: 10
+ZI cured at foodlevel: 20
 
 SM chance: 0.1
