@@ -16,4 +16,8 @@ ZI food damage: 5
 ZI poison at foodlevel: 10
 ZI cured at foodlevel: 20
 
+SM enabled: true
 SM chance: 0.1
+SM cave spiders per nest: 4
+SM nest radius: 5
+SM nest despawn time: 1200
