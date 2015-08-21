@@ -15,6 +15,7 @@ import org.github.MrCrime.More_Dangers.zombie_infection.ZombieAttackListener;
 public class Main extends JavaPlugin {
     
 	//Coal-explosion settings
+	private static boolean CEEnabled;
 	private static double break_explosionChance;
 	private static double torch_explosionChance;
 	private static int torch_range;
@@ -45,8 +46,10 @@ public class Main extends JavaPlugin {
 		
 		instance = this;
 		
-		new CoalBreakListener(this);
-		new TorchNearCoalListener(this);
+		if (CEEnabled) {
+			new CoalBreakListener(this);
+			new TorchNearCoalListener(this);
+		}
 		if (BNEnabled) new NetherrackWalkListener(this);
 		if (SWEnabled) new SpiderAttackListener(this);
 		new ZombieAttackListener(this);
@@ -56,6 +59,7 @@ public class Main extends JavaPlugin {
 	private void readConfig() {
 		config = getConfig();
 		
+		CEEnabled = config.getBoolean("CE enabled");
 		break_explosionChance = config.getDouble("CE break explosion chance");
 		torch_explosionChance = config.getDouble("CE torch explosion chance");
 		torch_range = config.getInt("CE torch range");
