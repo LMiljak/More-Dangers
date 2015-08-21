@@ -1,7 +1,16 @@
-break_explosionChance: 0.03125
-torch_explosionChance: 0.2
-torch_range: 2
-explosion_power: 3.0
-explosion_delay: 2
+CE enabled: true
+CE break explosion chance: 0.03125
+CE torch explosion chance: 0.2
+CE torch range: 2
+CE explosion power: 3.0
+CE explosion delay: 2
 
-zombie_food_damage: 5
+SW enabled: true
+SW web chance: 1.0
+SW web despawn time: 60
+
+BN enabled: true
+
+ZI food damage: 5
+
+SM chance: 0.1

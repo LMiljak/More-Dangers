@@ -25,9 +25,9 @@ public class ExplosionCauser {
 	 * 		the first block to explode
 	 */
 	public void coalExplosion(Block source) {
-		World world = source.getWorld();
+		final World world = source.getWorld();
 		
-		LinkedList<Block> vein = getNeighbourCoal(source);
+		final LinkedList<Block> vein = getNeighbourCoal(source);
 		
 		world.playSound(source.getLocation(), Sound.FUSE, 1F, 1F);
 		
