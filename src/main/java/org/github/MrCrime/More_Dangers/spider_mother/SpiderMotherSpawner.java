@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.block.Block;
 import org.bukkit.entity.CaveSpider;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Spider;

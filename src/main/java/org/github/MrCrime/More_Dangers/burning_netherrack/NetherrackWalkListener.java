@@ -9,8 +9,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.plugin.Plugin;
-import org.github.MrCrime.More_Dangers.Main;
-
 /**
  * Listens for players walking on netherrack, and
  * if the player isn't wearing any form of boots,
