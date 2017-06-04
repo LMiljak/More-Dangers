@@ -17,8 +17,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.github.MrCrime.More_Dangers.Main;
 import org.github.MrCrime.More_Dangers.Util;
 
-import com.darkblade12.particleeffect.ParticleEffect;
-
 /**
  * Turns a fraction of the spiders that spawn into spider mothers.
  * 
@@ -53,6 +51,7 @@ public class SpiderMotherSpawner implements Listener {
 	 * @param event
 	 * 		The event thrown by the server.
 	 */
+	@SuppressWarnings("deprecation")
 	@EventHandler (priority = EventPriority.MONITOR)
 	public void onSpiderSpawn(CreatureSpawnEvent event) {
 		if (!event.getEntityType().equals(EntityType.SPIDER) || 
@@ -63,7 +62,7 @@ public class SpiderMotherSpawner implements Listener {
 		
 		CaveSpider child = (CaveSpider) 
 				spider.getWorld().spawnEntity(spider.getLocation(), EntityType.CAVE_SPIDER);
-		spider.setPassenger(child);
+		spider.getPassengers().add(child);
 		
 		Util.displayParticleEntity(ParticleEffect.EXPLOSION_LARGE, spider);
 	}
