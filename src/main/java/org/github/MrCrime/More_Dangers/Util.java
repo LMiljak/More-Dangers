@@ -3,7 +3,6 @@ package org.github.MrCrime.More_Dangers;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.World;
