@@ -45,6 +45,10 @@
 			<id>spigot-repo</id>
 			<url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
 		</repository>
+		<repository>
+			<id>taico-repo</id>
+			<url>http://repository.taico.nl/</url>
+		</repository>
 	</repositories>
 
 
@@ -60,6 +64,12 @@
 			<artifactId>bukkit</artifactId>
 			<version>1.11.2-R0.1-SNAPSHOT</version>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>nl.taico</groupId>
+			<artifactId>TaeirLib</artifactId>
+			<version>[1.5.7,)</version>
+			<scope>compile</scope>
 		</dependency>
 	</dependencies>
 </project>
