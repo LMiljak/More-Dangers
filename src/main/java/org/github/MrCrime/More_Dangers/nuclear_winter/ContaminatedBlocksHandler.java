@@ -22,6 +22,8 @@ public class ContaminatedBlocksHandler implements Listener {
 	private HashSet<Block> contaminatedBlocks; // Contaminated blocks that are
 												// not in sourceBlocks and
 												// activeBlocks.
+	
+	private ContaminatedBlocksVisualizer visualizer;
 
 	public ContaminatedBlocksHandler(Plugin plugin) {
 		plugin.getServer().getPluginManager().registerEvents(this, plugin);
@@ -29,6 +31,8 @@ public class ContaminatedBlocksHandler implements Listener {
 		this.sourceBlocks = new HashSet<>();
 		this.activeBlocks = new HashSet<>();
 		this.contaminatedBlocks = new HashSet<>();
+		
+		this.visualizer = new ContaminatedBlocksVisualizer(this);
 	}
 
 	/**
@@ -68,13 +72,25 @@ public class ContaminatedBlocksHandler implements Listener {
 	 *         the block was already actively contaminated or is an AIR block.
 	 */
 	public boolean contaminate(Block block) {
-		if (!block.isEmpty())
+		if (block.getType().isSolid())
 			return false;
 
 		activeBlocks.add(block);
 		contaminatedBlocks.remove(block);
 
 		return true;
+	}
+
+	public HashSet<Block> getSourceBlocks() {
+		return sourceBlocks;
+	}
+
+	public HashSet<Block> getActiveBlocks() {
+		return activeBlocks;
+	}
+
+	public HashSet<Block> getContaminatedBlocks() {
+		return contaminatedBlocks;
 	}
 
 }
