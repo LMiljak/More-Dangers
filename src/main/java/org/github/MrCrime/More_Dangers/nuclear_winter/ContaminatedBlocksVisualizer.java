@@ -12,9 +12,9 @@ import org.github.MrCrime.More_Dangers.Main;
  */
 public class ContaminatedBlocksVisualizer {
 
-	private static final double DISPLAY_CHANCE = 0.1;
-	
-	private HashSet<Block> sourceBlocks;
+	private static final double DISPLAY_CHANCE_NORMAL = 0.01;
+	private static final double DISPLAY_CHANCE_ACTIVE = 0.1;
+
 	private HashSet<Block> activeBlocks;
 	private HashSet<Block> contaminatedBlocks;
 
@@ -22,43 +22,39 @@ public class ContaminatedBlocksVisualizer {
 		@Override
 		public void run() {
 			for (Block activeBlock : activeBlocks) {
-				visualize(activeBlock);
+				if (Math.random() < DISPLAY_CHANCE_ACTIVE) {
+					visualize(activeBlock);
+				}
 			}
 		}
 	};
-	
+
 	private BukkitRunnable contaminatedBlockDisplayer = new BukkitRunnable() {
 		@Override
 		public void run() {
-			for (Block block : sourceBlocks) {
-				if (Math.random() < DISPLAY_CHANCE) {
-					visualize(block);
-				}
-			}
 			for (Block block : contaminatedBlocks) {
-				if (Math.random() < DISPLAY_CHANCE) {
+				if (Math.random() < DISPLAY_CHANCE_NORMAL) {
 					visualize(block);
 				}
 			}
 		}
 	};
-	
+
 	public ContaminatedBlocksVisualizer(ContaminatedBlocksHandler contaminatedBlockStorage) {
-		this.sourceBlocks = contaminatedBlockStorage.getSourceBlocks();
 		this.activeBlocks = contaminatedBlockStorage.getActiveBlocks();
 		this.contaminatedBlocks = contaminatedBlockStorage.getContaminatedBlocks();
-		
+
 		start();
 	}
-	
+
 	/**
 	 * Starts visualizing the blocks.
 	 */
 	public void start() {
-		activeBlockDisplayer.runTaskTimerAsynchronously(Main.getInstance(), 0, 15);
-		contaminatedBlockDisplayer.runTaskTimerAsynchronously(Main.getInstance(), 0, 15);
+		activeBlockDisplayer.runTaskTimer(Main.getInstance(), 0, 30);
+		contaminatedBlockDisplayer.runTaskTimer(Main.getInstance(), 0, 30);
 	}
-	
+
 	/**
 	 * Cancels visualizing the blocks.
 	 */
@@ -66,7 +62,7 @@ public class ContaminatedBlocksVisualizer {
 		activeBlockDisplayer.cancel();
 		contaminatedBlockDisplayer.cancel();
 	}
-	
+
 	/**
 	 * Displays the appropriate particle effect.
 	 * 
@@ -74,9 +70,9 @@ public class ContaminatedBlocksVisualizer {
 	 *            The block that should be visualized.
 	 */
 	public void visualize(Block block) {
-		final Particle particle = Particle.SMOKE_NORMAL;
+		final Particle particle = Particle.SMOKE_LARGE;
 		final int count = 1;
-		
+
 		block.getWorld().spawnParticle(particle, block.getLocation(), count);
 	}
 
