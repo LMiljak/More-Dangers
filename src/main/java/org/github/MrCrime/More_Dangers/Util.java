@@ -25,13 +25,12 @@ public class Util {
 	public static List<Block> directNeighbours(Block block) {
 
 		World world = block.getWorld();
-		Location loc = block.getLocation();
 
-		int x = (int) loc.getX();
-		int y = (int) loc.getY();
-		int z = (int) loc.getZ();
+		int x = block.getX();
+		int y = block.getY();
+		int z = block.getZ();
 
-		List<Block> directNeighbours = new ArrayList<Block>();
+		List<Block> directNeighbours = new ArrayList<Block>(6);
 		directNeighbours.add(world.getBlockAt(x + 1, y, z));
 		directNeighbours.add(world.getBlockAt(x - 1, y, z));
 		directNeighbours.add(world.getBlockAt(x, y + 1, z));
