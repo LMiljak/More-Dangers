@@ -3,13 +3,12 @@ package org.github.MrCrime.More_Dangers;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.scheduler.BukkitRunnable;
-
-import com.darkblade12.particleeffect.ParticleEffect;
 
 /**
  * Contains some useful static methods.
@@ -53,13 +52,14 @@ public class Util {
 	 * @param entity
 	 * 		The entity that should get the particles around it
 	 */
-	public static void displayParticleEntity(final ParticleEffect effect, final Entity entity) {
+	public static void displayParticleEntity(final Effect effect, final Entity entity) {
 		
 		new BukkitRunnable() {
 			@Override
 			public void run() {
 				if (entity.isDead()) cancel();
-				effect.display(0, 0, 0, 1, 1, entity.getLocation().add(0, 1, 0), 30);
+				// Displaying the effect.
+				entity.getWorld().playEffect(entity.getLocation(), effect, -1);
 			}
 		}.runTaskTimer(Main.getInstance(), 0, 15);
 		
