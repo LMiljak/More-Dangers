@@ -29,7 +29,7 @@ public class ExplosionCauser {
 		
 		final LinkedList<Block> vein = getNeighbourCoal(source);
 		
-		world.playSound(source.getLocation(), Sound.FUSE, 1F, 1F);
+		world.playSound(source.getLocation(), Sound.ENTITY_TNT_PRIMED, 1F, 1F);
 		
 		(new BukkitRunnable() {
 
