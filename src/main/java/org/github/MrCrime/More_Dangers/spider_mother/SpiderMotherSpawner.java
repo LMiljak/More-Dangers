@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.bukkit.Effect;
+import org.bukkit.Particle;
 import org.bukkit.entity.CaveSpider;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Spider;
@@ -20,96 +22,95 @@ import org.github.MrCrime.More_Dangers.Util;
 /**
  * Turns a fraction of the spiders that spawn into spider mothers.
  * 
- * Spider mothers can be recognised by the particle effect around them.
- * When they die, cobweb will appear all over the place and some cave
- * spiders will spawn around the spider mother (spider nest).
+ * Spider mothers can be recognised by the particle effect around them. When
+ * they die, cobweb will appear all over the place and some cave spiders will
+ * spawn around the spider mother (spider nest).
  * 
- * The spider nest will disappear when all the cave spiders that spawned
- * with the spider are gone.
+ * The spider nest will disappear when all the cave spiders that spawned with
+ * the spider are gone.
  */
 public class SpiderMotherSpawner implements Listener {
 
 	private List<Spider> spider_mothers;
 	private List<SpiderNest> nests;
-	
+
 	/**
 	 * Registers the SpiderMotherSpawner.
 	 * 
 	 * @param plugin
-	 * 		The plugin the server uses.
+	 *            The plugin the server uses.
 	 */
 	public SpiderMotherSpawner(Plugin plugin) {
 		plugin.getServer().getPluginManager().registerEvents(this, plugin);
 		spider_mothers = new ArrayList<Spider>();
 		nests = new ArrayList<SpiderNest>();
 	}
-	
+
 	/**
-	 * When a spider spawns, it has a chance to be added to the list
-	 * of spider_mothers and particle effects will appear all around it.
+	 * When a spider spawns, it has a chance to be added to the list of
+	 * spider_mothers and particle effects will appear all around it.
 	 * 
 	 * @param event
-	 * 		The event thrown by the server.
+	 *            The event thrown by the server.
 	 */
-	@SuppressWarnings("deprecation")
-	@EventHandler (priority = EventPriority.MONITOR)
+	@EventHandler(priority = EventPriority.MONITOR)
 	public void onSpiderSpawn(CreatureSpawnEvent event) {
-		if (!event.getEntityType().equals(EntityType.SPIDER) || 
-				new Random().nextDouble() > Main.getSMChance()) return;
+		if (!event.getEntityType().equals(EntityType.SPIDER) || new Random().nextDouble() > Main.getSMChance())
+			return;
 		Spider spider = (Spider) event.getEntity();
-		
+
 		spider_mothers.add(spider);
-		
-		CaveSpider child = (CaveSpider) 
-				spider.getWorld().spawnEntity(spider.getLocation(), EntityType.CAVE_SPIDER);
+
+		CaveSpider child = (CaveSpider) spider.getWorld().spawnEntity(spider.getLocation(), EntityType.CAVE_SPIDER);
 		spider.addPassenger(child);
-		
-		Util.displayParticleEntity(ParticleEffect.EXPLOSION_LARGE, spider);
+
+		Util.displayParticleEntity(Particle.EXPLOSION_LARGE, 100, spider);
 	}
-	
+
 	/**
-	 * Creates a SpiderNest around the corpse of a
-	 * spider mother after the mother dies.
+	 * Creates a SpiderNest around the corpse of a spider mother after the
+	 * mother dies.
 	 * 
 	 * @param event
-	 * 		The event thrown by the server
+	 *            The event thrown by the server
 	 */
-	@EventHandler (priority = EventPriority.MONITOR) 
+	@EventHandler(priority = EventPriority.MONITOR)
 	public void onSpiderMotherDeath(EntityDeathEvent event) {
-		if (!spider_mothers.contains(event.getEntity())) return;
-		
+		if (!spider_mothers.contains(event.getEntity()))
+			return;
+
 		final SpiderNest nest = new SpiderNest(event.getEntity().getLocation());
 		nests.add(nest);
-		
+
 		new BukkitRunnable() {
 
 			@Override
 			public void run() {
 				nests.remove(nest);
 			}
-			
+
 		}.runTaskLater(Main.getInstance(), Main.getNestDespawnTime() + 100);
 	}
-	
+
 	/**
 	 * Destroys a nest when the last child of that nest dies.
 	 * 
 	 * @param event
-	 * 		The event thrown by the server
+	 *            The event thrown by the server
 	 */
-	@EventHandler (priority = EventPriority.MONITOR)
+	@EventHandler(priority = EventPriority.MONITOR)
 	public void onChildDeath(EntityDeathEvent event) {
-		
+
 		for (SpiderNest nest : nests) {
 			boolean[] bools = nest.removeChild(event.getEntity());
-			if (!bools[0]) continue;
+			if (!bools[0])
+				continue;
 			if (bools[1]) {
 				nests.remove(nest);
 				return;
 			}
 		}
-		
-		
+
 	}
-	
+
 }
