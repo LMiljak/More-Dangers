@@ -1,7 +1,6 @@
 /target/
 <<<<<<< HEAD
 =======
-/src/
 >>>>>>> master
 *.classpath
 *.settings

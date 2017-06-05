@@ -5,9 +5,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.github.MrCrime.More_Dangers.burning_netherrack.NetherrackWalkListener;
 import org.github.MrCrime.More_Dangers.coal_explosion.CoalBreakListener;
 import org.github.MrCrime.More_Dangers.coal_explosion.TorchNearCoalListener;
+import org.github.MrCrime.More_Dangers.nuclear_winter.ContaminatedBlocksHandler;
 import org.github.MrCrime.More_Dangers.spider_mother.SpiderMotherSpawner;
 import org.github.MrCrime.More_Dangers.spiderwebs.SpiderAttackListener;
 import org.github.MrCrime.More_Dangers.zombie_infection.ZombieAttackListener;
+
+import nl.taico.taeirlib.commands.CommandFramework;
 
 /**
  * The "main" class of the plugin.
@@ -44,6 +47,7 @@ public class Main extends JavaPlugin {
 	private static int nest_despawn_time;
 	
 	private static Main instance;
+	
 	private FileConfiguration config;
 	
 	@Override
@@ -61,6 +65,12 @@ public class Main extends JavaPlugin {
 		if (SWEnabled) new SpiderAttackListener(this);
 		if (ZIEnabled) new ZombieAttackListener(this);
 		if (SMEnabled) new SpiderMotherSpawner(this);
+		/* if enabled */ new ContaminatedBlocksHandler(this);
+	}
+	
+	private void registerCommands() {
+		CommandFramework commandFramework = new CommandFramework(this);
+		
 	}
 	
 	private void readConfig() {
