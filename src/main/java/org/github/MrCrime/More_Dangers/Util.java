@@ -16,27 +16,41 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class Util {
 
 	/**
-	 * Returns a list of all six blocks right next to the given block.
+	 * Returns a list of all six blocks right next to the given block. If the
+	 * neighbouring blocks are in unloaded chunks, then they're not included in
+	 * the list.
 	 * 
 	 * @param block
 	 *            The block to get the neighbours from
 	 * @return The six blocks next to the given block
 	 */
 	public static List<Block> directNeighbours(Block block) {
-
 		World world = block.getWorld();
+		int maxY = world.getMaxHeight();
 
 		int x = block.getX();
 		int y = block.getY();
 		int z = block.getZ();
 
 		List<Block> directNeighbours = new ArrayList<Block>(6);
-		directNeighbours.add(world.getBlockAt(x + 1, y, z));
-		directNeighbours.add(world.getBlockAt(x - 1, y, z));
-		directNeighbours.add(world.getBlockAt(x, y + 1, z));
-		directNeighbours.add(world.getBlockAt(x, y - 1, z));
-		directNeighbours.add(world.getBlockAt(x, y, z + 1));
-		directNeighbours.add(world.getBlockAt(x, y, z - 1));
+		if (world.isChunkLoaded((x + 1) >> 4, z >> 4)) {
+			directNeighbours.add(world.getBlockAt(x + 1, y, z));
+		}
+		if (world.isChunkLoaded((x - 1) >> 4, z >> 4)) {
+			directNeighbours.add(world.getBlockAt(x - 1, y, z));
+		}
+		if (y + 1 < maxY) {
+			directNeighbours.add(world.getBlockAt(x, y + 1, z));
+		}
+		if (y - 1 >= 0) {
+			directNeighbours.add(world.getBlockAt(x, y - 1, z));
+		}
+		if (world.isChunkLoaded(x, (z + 1) >> 4)) {
+			directNeighbours.add(world.getBlockAt(x, y, z + 1));
+		}
+		if (world.isChunkLoaded(x, (z - 1) >> 4)) {
+			directNeighbours.add(world.getBlockAt(x, y, z - 1));
+		}
 
 		return directNeighbours;
 	}
