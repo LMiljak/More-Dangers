@@ -63,7 +63,7 @@ public class SpiderMotherSpawner implements Listener {
 		CaveSpider child = (CaveSpider) spider.getWorld().spawnEntity(spider.getLocation(), EntityType.CAVE_SPIDER);
 		spider.addPassenger(child);
 
-		Util.displayParticleEntity(Particle.EXPLOSION_LARGE, 100, spider);
+		Util.displayParticleEntity(Particle.EXPLOSION_LARGE, 1, spider);
 	}
 
 	/**
