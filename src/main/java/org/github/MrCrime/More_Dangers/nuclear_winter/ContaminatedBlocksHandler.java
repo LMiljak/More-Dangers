@@ -55,11 +55,8 @@ public class ContaminatedBlocksHandler implements Listener {
 	 * @param event
 	 *            The event thrown.
 	 */
-	int test = 0;
 	@EventHandler(priority = EventPriority.MONITOR)
 	public void onChunkLoaded(ChunkLoadEvent event) {
-		test++;
-		Main.getInstance().getServer().broadcastMessage("Chunk Loaded " + test);
 		for (Block block : getTopBlocksInChunk(event.getChunk())) {
 			if (contaminate(block)) {
 				sourceBlocks.add(block);
@@ -111,7 +108,12 @@ public class ContaminatedBlocksHandler implements Listener {
 		Main.getInstance().getServer().broadcastMessage("Active blocks: " + activeBlocks.size());
 		Main.getInstance().getServer().broadcastMessage("Contaminated blocks: " + contaminatedBlocks.size());
 		HashSet<Block> copyActiveBlocks = new HashSet<>(activeBlocks);
+		boolean hi = true;
 		for (Block block : copyActiveBlocks) {
+			if (hi) {
+				Main.getInstance().getServer().broadcastMessage("Total Chunks: " + block.getWorld().getLoadedChunks().length);
+				hi = false;
+			}
 			for (Block neighbour : Util.directNeighbours(block)) {
 				if (!contaminatedBlocks.contains(neighbour) && !activeBlocks.contains(neighbour)) {
 					contaminate(neighbour);
