@@ -40,12 +40,12 @@ public class SpiderAttackListener implements Listener {
 		if (new Random().nextDouble() > Main.getWebChance()) return;
 		
 		final Block b = event.getEntity().getLocation().getBlock();
-		b.setType(Material.WEB);
+		b.setType(Material.COBWEB);
 		
 		new BukkitRunnable() {
 			@Override
 			public void run() {
-				if (b.getType().equals(Material.WEB)) b.breakNaturally();
+				if (b.getType().equals(Material.COBWEB)) b.breakNaturally();
 			}
 		}.runTaskLater(Main.getInstance(), Main.getWebDespawnTime());
 	}

@@ -36,7 +36,8 @@ public class TorchNearCoalListener implements Listener {
 	 */
 	@EventHandler (priority = EventPriority.MONITOR)
 	public void onBlockPlace(BlockPlaceEvent event) {
-		if (event.getBlock().getType().equals(Material.TORCH)) {
+		Material material = event.getBlock().getType();
+		if (material.equals(Material.TORCH) || material.equals(Material.WALL_TORCH)) {
 			Location loc = event.getBlock().getLocation();
 			World world = loc.getWorld();
 			

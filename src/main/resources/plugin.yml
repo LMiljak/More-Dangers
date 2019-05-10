@@ -1,3 +1,4 @@
 name: More-Dangers
 main: org.github.MrCrime.More_Dangers.Main
 version: 1.0
+api-version: 1.13

@@ -42,7 +42,7 @@ public class SpiderNest {
 		for (Location loc : Util.getSphere(center, Main.getNestRadius(), true)) {
 			Block b = loc.getBlock();
 			if (!b.getType().isSolid()){
-				b.setType(Material.WEB);
+				b.setType(Material.COBWEB);
 				web.add(b);
 			}
 		}
@@ -92,7 +92,7 @@ public class SpiderNest {
 	 */
 	private void destroy() {
 		for (Block b : web) {
-			if (b.getType().equals(Material.WEB)) {
+			if (b.getType().equals(Material.COBWEB)) {
 				b.breakNaturally();
 			}
 		}
